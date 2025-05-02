@@ -16,8 +16,5 @@ namespace WebDevProject.Models
         [ForeignKey("Dep_ID")] // Add this attribute
         public Department Department { get; set; }
 
-        // Foreign key to Identity User
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
     }
 }

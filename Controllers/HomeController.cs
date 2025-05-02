@@ -13,9 +13,14 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+     public IActionResult Index()
     {
-        return View();
+        Console.Write(User.Identity.IsAuthenticated);
+        if (User.Identity.IsAuthenticated)
+        {
+            return View("authenticatedHome");
+        }
+        return View(); 
     }
 
     public IActionResult Privacy()

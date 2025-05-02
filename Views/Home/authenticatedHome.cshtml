@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex flex-column align-items-center justify-content-center vh-100 bg-light">
+    <div class="text-center">
+        <h1 class="mb-4">Welcome, @User.Identity.Name!</h1>
+
+        <div class="btn-group" role="group" aria-label="Dashboard Actions">
+            <a asp-controller="Department" asp-action="getallview" class="btn btn-primary btn-lg">View Departments</a>
+
+            <a asp-action="FutureView" class="btn btn-secondary btn-lg">Coming Soon</a>
+        </div>
+    </div>
+</div>
