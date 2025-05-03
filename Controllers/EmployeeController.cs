@@ -57,7 +57,9 @@ namespace WebDevProject.Controllers
                     Fname = empDto.Fname,
                     Lname = empDto.Lname,
                     Age = empDto.Age,
-                    Salary = empDto.Salary
+                    Salary = empDto.Salary,
+                    Dep_ID = empDto.Dep_ID
+                    
                 };
 
                 var count = repo.Add(emp);
@@ -93,6 +95,23 @@ namespace WebDevProject.Controllers
         }
         public IActionResult Edit(int id)
         {
+            var departments = depRepo.GetAll();
+
+            if (departments == null || !departments.Any())
+            {
+                // throw new Exception("No departments found");
+
+                ViewBag.Departments = new List<SelectListItem>(); // Prevent null
+            }
+            else
+            {
+                ViewBag.Departments = departments.Select(d => new SelectListItem
+                {
+                    Value = d.ID.ToString(),
+                    Text = d.Dep_name
+                }).ToList();
+            }
+
             var emp = repo.GetById(id);
             return View(emp);
         }

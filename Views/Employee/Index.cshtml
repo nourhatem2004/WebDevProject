@@ -29,6 +29,9 @@
                     @Html.DisplayNameFor(model => model.Salary)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Dep_ID)
+                </th>
+                <th>
                     Actions
                 </th>
             </tr>
@@ -52,12 +55,11 @@
                     @Html.DisplayFor(modelItem => item.Salary)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Dep_ID)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning btn-sm">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-info btn-sm">Details</a>
-                    @if (item.ID != 15)
-                    {
                     <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm">Delete</a>
-                    }
                 </td>
             </tr>
 }
