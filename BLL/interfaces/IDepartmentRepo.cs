@@ -10,6 +10,8 @@ namespace WebDevProject.BLL.interfaces
     public interface IDepartmentRepo
     {
         IEnumerable<Department> GetAll();
+
+        Department? GetById(int id);
         int Add(Department d);
         int Update(Department d);
         int Delete(int id);

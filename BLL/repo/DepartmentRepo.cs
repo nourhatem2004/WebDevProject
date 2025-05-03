@@ -18,7 +18,7 @@ namespace WebDevProject.BLL.repo
         public DepartmentRepo()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("Server=NOURLAPTOP;Database=webdevproject;Trusted_Connection=True;TrustServerCertificate=True;")
+            optionsBuilder.UseSqlServer("Server=MALAKS-LAPTOP;Database=WebDevProjectDB;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True;")
             .EnableSensitiveDataLogging() // Show parameter values
             .LogTo(Console.WriteLine, LogLevel.Information);
             dbContext = new ApplicationDbContext(optionsBuilder.Options);
@@ -27,6 +27,10 @@ namespace WebDevProject.BLL.repo
         public IEnumerable<Department> GetAll()
         {
             return dbContext.Departments.ToList();
+        }
+        public Department? GetById(int id)
+        {
+            return dbContext.Departments.Find(id); //use find for better performance
         }
 
         public int Add(Department d)
@@ -41,19 +45,27 @@ namespace WebDevProject.BLL.repo
             return dbContext.SaveChanges();
         }
 
-        public int Delete(int currentdept)
+        public int Delete(int currentDeptId)
         {
-            
-            var employeesToMove = dbContext.Employees.Where(e => e.Dep_ID == currentdept).ToList();
+            var department = dbContext.Departments.Find(currentDeptId);
+            if (department == null)
+                return 0;
 
-            foreach (var Employee in employeesToMove)
+            var fallbackDept = dbContext.Departments.Find(15);
+            if (fallbackDept == null)
+                throw new Exception("Fallback department with ID 15 does not exist.");
+
+            var employeesToMove = dbContext.Employees
+                .Where(e => e.Dep_ID == currentDeptId)
+                .ToList();
+
+            foreach (var employee in employeesToMove)
             {
-                Employee.Dep_ID = 15;
+                employee.Dep_ID = fallbackDept.ID;
             }
 
             dbContext.SaveChanges();
-            
-            dbContext.Departments.Remove(dbContext.Departments.Find(currentdept));
+            dbContext.Departments.Remove(department);
             return dbContext.SaveChanges();
         }
 
