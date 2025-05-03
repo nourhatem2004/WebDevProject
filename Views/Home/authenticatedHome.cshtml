@@ -2,16 +2,33 @@
     ViewData["Title"] = "Dashboard";
 }
 
+<style>
+    .dashboard-container {
+        background: linear-gradient(to right, #f0f4ff, #ffe6f0);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .dashboard-buttons a {
+        margin: 10px;
+        min-width: 200px;
+    }
+</style>
+
 <div class="d-flex flex-column align-items-center justify-content-center vh-100 bg-light">
-    <div class="text-center">
-        <h1 class="mb-4">Welcome, @User.Identity.Name!</h1>
+    <div class="dashboard-container text-center">
+        <h1>Welcome, @User.Identity.Name!</h1>
 
-        <div class="btn-group" role="group" aria-label="Dashboard Actions">
-            <a asp-controller="Department" asp-action="getallview" class="btn btn-primary btn-lg">View Departments</a>
-            <br />
-            <br />
-            <a asp-controller="Employee" asp-action="Index" class="btn btn-primary btn-lg">View Employees</a>
-
+        <div class="dashboard-buttons d-flex flex-column align-items-center">
+            <a asp-controller="Department" asp-action="getallview" class="btn btn-outline-primary btn-lg">View Departments</a>
+            <a asp-controller="Employee" asp-action="Index" class="btn btn-outline-success btn-lg">View Employees</a>
         </div>
     </div>
 </div>

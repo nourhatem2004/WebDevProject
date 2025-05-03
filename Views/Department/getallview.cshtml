@@ -2,49 +2,57 @@
 
 @{
     ViewData["Title"] = "getallview";
+    var specialDept = Model.FirstOrDefault(d => d.ID == 15);
+    var otherDepts = Model.Where(d => d.ID != 15);
 }
+
+<style>
+    .special-row {
+        background-color: #ffe599; /* Light orange */
+        font-weight: bold;
+        border: 2px solid #ffbf00;
+    }
+</style>
 
 <h1>Departments</h1>
 
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dep_name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.establish_date)
-            </th>
-            <th>
-                Actions
-            </th>
+            <th>@Html.DisplayNameFor(model => model.ID)</th>
+            <th>@Html.DisplayNameFor(model => model.Dep_name)</th>
+            <th>@Html.DisplayNameFor(model => model.establish_date)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dep_name)
-            </td>
-            <td>
-                @item.establish_date.ToString("d") <!-- Format date as short date -->
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning btn-sm">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-info btn-sm">Details</a>
-                    @if (item.ID != 15)
-                    {
-                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm">Delete</a>
-                    }
-            </td>
-        </tr>
-}
+        @foreach (var item in otherDepts)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Dep_name</td>
+                <td>@item.establish_date.ToString("d")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+
+        @if (specialDept != null)
+        {
+            <tr class="special-row">
+                <td>@specialDept.ID</td>
+                <td>@specialDept.Dep_name</td>
+                <td>@specialDept.establish_date.ToString("d")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@specialDept.ID" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@specialDept.ID" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@specialDept.ID" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

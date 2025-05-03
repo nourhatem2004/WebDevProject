@@ -2,10 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        text-align: center;
+        background: linear-gradient(to right, #e3f2fd, #fce4ec);
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #666;
+    }
+
+    .auth-buttons a {
+        margin: 0 10px;
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+</style>
+
 <div class="hero-section">
-    <h1>Welcome to My App</h1>
-    <p>A custom-designed ASP.NET Core application</p>
-    <!-- Add login/register buttons -->
+    <h1>Navigate Through our Database</h1>
+    <p>Welcome to our custom-built ASP.NET Core application</p>
     <div class="auth-buttons">
         <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
         <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Register">Register</a>
